@@ -25,7 +25,7 @@ export default function YieldChart({ yield_data }: { yield_data: string[] }) {
   );
 
   const data = {
-    labels: yield_data[0].split(',').slice(1),
+    labels: [5, 7, 10, 20, 30],
     datasets: [{
       label: yield_data[1].split(',')[0],
       data: yield_data[1].split(',').slice(1),
@@ -33,7 +33,15 @@ export default function YieldChart({ yield_data }: { yield_data: string[] }) {
     }]
   };
 
+  const options = {
+    scales: {
+      x: {
+        type: 'linear'
+      }
+    }
+  };
+
   return (
-    <Line data={data} />
+    <Line data={data} options={options} />
   );
 }
