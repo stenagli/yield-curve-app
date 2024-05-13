@@ -27,6 +27,7 @@ export default function YieldChart({ yield_data }: { yield_data: string[] }) {
   const data = {
     labels: yield_data[0].split(',').slice(1),
     datasets: [{
+      label: yield_data[1].split(',')[0],
       data: yield_data[1].split(',').slice(1),
       borderColor: 'rgb(75, 192, 192)'
     }]
