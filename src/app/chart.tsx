@@ -36,7 +36,7 @@ export default function YieldChart({ yield_data }: { yield_data: string[] }) {
   const options = {
     scales: {
       x: {
-        type: 'linear'
+        type: 'linear' as const
       }
     }
   };
