@@ -54,7 +54,7 @@ class YieldData {
   }
 }
 
-export default function YieldChart({ real_data, nominal_data }: { real_data: string, nominal_data: string }) {
+export default function YieldChart({ yield_csv }: { yield_csv: string }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -65,18 +65,13 @@ export default function YieldChart({ real_data, nominal_data }: { real_data: str
     Legend
   );
 
-  const realData = new YieldData(real_data);
-  const nominalData = new YieldData(nominal_data);
+  const yieldData = new YieldData(yield_csv);
 
   const data = {
     datasets: [{
-      label: `${realData.latestLabel()} Real`,
-      data: realData.latestData(),
+      label: yieldData.latestLabel(),
+      data: yieldData.latestData(),
       borderColor: 'rgb(75, 192, 192)'
-    }, {
-      label: `${nominalData.latestLabel()} Nominal`,
-      data: nominalData.latestData(),
-      borderColor: 'rgb(255, 87, 51)'
     }]
   };
 
