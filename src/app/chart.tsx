@@ -54,7 +54,7 @@ class YieldData {
   }
 }
 
-export default function YieldChart({ yield_csv }: { yield_csv: string }) {
+export default function YieldChart({ yield_csv, title }: { yield_csv: string, title: string }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -76,6 +76,12 @@ export default function YieldChart({ yield_csv }: { yield_csv: string }) {
   };
 
   const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: title
+      }
+    },
     scales: {
       x: {
         type: 'linear' as const

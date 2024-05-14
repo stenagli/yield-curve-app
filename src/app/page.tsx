@@ -7,8 +7,8 @@ export default async function Home() {
 
   return (
     <>
-      <YieldChart yield_csv={real_data} />
-      <YieldChart yield_csv={nominal_data} />
+      <YieldChart yield_csv={real_data} title={'Real Yields'} />
+      <YieldChart yield_csv={nominal_data} title={'Nominal Yields'} />
     </>
   );
 }
