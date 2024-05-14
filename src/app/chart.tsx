@@ -14,10 +14,10 @@ import {
 import { Line } from 'react-chartjs-2';
 
 class YieldData {
-  data: string;
+  private data: string;
 
-  _latestParsedData!: string[][];
-  _latestData!: { x: number, y: number }[];
+  private _latestParsedData: string[][] | undefined;
+  private _latestData: { x: number, y: number }[] | undefined;
 
   constructor(data: string) {
     this.data = data;
@@ -42,7 +42,7 @@ class YieldData {
     return this._latestData;
   }
 
-  latestParsedData(): string[][] {
+  private latestParsedData(): string[][] {
     if (this._latestParsedData)
       return this._latestParsedData;
 
