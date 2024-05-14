@@ -34,7 +34,6 @@ class YieldData {
     this._latestData = [];
     for (let step = 1; step < this.latestParsedData()[1].length; step++) {
       const labelField: string = this.latestParsedData()[0][step]
-      debugger;
       this._latestData.push({
         x: Number(labelField.match(/(\d+)/)![0]) / (labelField.includes('Mo') ? 12 : 1),
         y: Number(this.latestParsedData()[1][step])
@@ -90,6 +89,8 @@ export default function YieldChart({ real_data, nominal_data }: { real_data: str
   };
 
   return (
-    <Line data={data} options={options} />
+    <div style={{ height: '95%' }}>
+      <Line data={data} options={options} />
+    </div>
   );
 }
