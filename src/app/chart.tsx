@@ -94,7 +94,7 @@ export default function YieldChart({ yield_csv, title }: { yield_csv: string, ti
   };
 
   return (
-    <div style={{ height: '95%' }}>
+    <div style={{ aspectRatio: 2 }}>
       <Line data={data} options={options} />
     </div>
   );
