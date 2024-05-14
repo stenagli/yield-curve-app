@@ -84,7 +84,11 @@ export default function YieldChart({ yield_csv, title }: { yield_csv: string, ti
     },
     scales: {
       x: {
-        type: 'linear' as const
+        type: 'linear' as const,
+        title: {
+          display: true,
+          text: 'Year'
+        }
       }
     }
   };
