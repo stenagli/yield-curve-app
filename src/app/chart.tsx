@@ -47,7 +47,7 @@ class YieldData {
       return this._latestParsedData;
 
     const temp: string[][] = [];
-    this.data.split('\n').forEach(row => temp.push(row.split(',')));
+    this.data.split('\n', 2).forEach(row => temp.push(row.split(',')));
 
     this._latestParsedData = temp;
     return this._latestParsedData;
