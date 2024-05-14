@@ -7,7 +7,7 @@ export default async function RealYieldChart() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <YieldChart yield_csv={real_data} title={'Real Yields'} />
+      <YieldChart yield_csv={real_data} title={'Real Yields'} borderColor={'rgb(75, 192, 192)'} />
     </Suspense>
   )
 };

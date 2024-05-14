@@ -54,7 +54,7 @@ class YieldData {
   }
 }
 
-export default function YieldChart({ yield_csv, title }: { yield_csv: string, title: string }) {
+export default function YieldChart({ yield_csv, title, borderColor }: { yield_csv: string, title: string, borderColor: string }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -71,7 +71,7 @@ export default function YieldChart({ yield_csv, title }: { yield_csv: string, ti
     datasets: [{
       label: yieldData.latestLabel(),
       data: yieldData.latestData(),
-      borderColor: 'rgb(75, 192, 192)'
+      borderColor: borderColor
     }]
   };
 
