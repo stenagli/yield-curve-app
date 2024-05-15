@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
 import Loading from './loading'
 import YieldChart from './chart';
+import { fetchNominalData } from './utils';
 
 export default async function RealYieldChart() {
-  const nominal_data = (await (await fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202405?field_tdr_date_value_month=202405&type=daily_treasury_yield_curve&page&_format=csv')).text())
+  const nominal_data = await fetchNominalData();
 
   return (
     <Suspense fallback={<Loading />}>
