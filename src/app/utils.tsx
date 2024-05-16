@@ -7,7 +7,7 @@ export async function fetchNominalData(): Promise<string> {
 }
 
 async function fetchData(type: string): Promise<string> {
-  return (await fetch(`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${yearMonth()}?type=${type}&field_tdr_date_value_month=${yearMonth()}&page&_format=csv`)).text()
+  return (await fetch(`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${yearMonth()}?type=${type}&field_tdr_date_value_month=${yearMonth()}&page&_format=csv`, { cache: 'no-store' })).text()
 }
 
 function yearMonth(): string {
