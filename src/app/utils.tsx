@@ -59,12 +59,11 @@ function yearMonth(date: Date): YearMonth {
   const year = date.getFullYear();
   const month = date.getMonth()+1;
   const paddedMonth = ('0' + month).slice(-2); // e.g. '05' for May
-  const yearMonthString = year + paddedMonth
+  const yearMonthString = year + paddedMonth;
   if (isValidYearMonth(yearMonthString))
     return yearMonthString as YearMonth;
   else
     throw new Error(`Invalid yearMonth: ${yearMonthString} (original date: ${date.toISOString()})`);
-
 }
 
 function isValidYearMonth(yearMonth: string): yearMonth is YearMonth {
