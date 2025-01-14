@@ -3,13 +3,9 @@ type YearMonth = `${number}${number}${number}${number}${number}${number}`;
 
 type TreasuryYieldType = 'daily_treasury_real_yield_curve' | 'daily_treasury_yield_curve';
 
-export async function fetchRealData(): Promise<string> {
-  return fetchData('daily_treasury_real_yield_curve');
-}
+export const fetchRealData = () => fetchData('daily_treasury_real_yield_curve');
 
-export async function fetchNominalData(): Promise<string> {
-  return fetchData('daily_treasury_yield_curve');
-}
+export const fetchNominalData = () => fetchData('daily_treasury_yield_curve');
 
 async function fetchData(type: TreasuryYieldType): Promise<string> {
   let data = await fetchDataToday(type);
@@ -31,26 +27,18 @@ const firstOfTheMonth = () => today().getDate() === 1;
 
 const today = () => new Date();
 
-function fetchDataToday(type: TreasuryYieldType) {
-  return fetchDataTemplate({ yearMonth: yearMonthToday(), type });
-}
+const fetchDataToday = (type: TreasuryYieldType) => fetchDataTemplate({ yearMonth: yearMonthToday(), type });
 
-function fetchDataYesterday(type: TreasuryYieldType) {
-  return fetchDataTemplate({ yearMonth: yearMonthYesterday(), type });
-}
+const fetchDataYesterday = (type: TreasuryYieldType) => fetchDataTemplate({ yearMonth: yearMonthYesterday(), type });
 
-async function fetchDataTemplate({ yearMonth, type }: {
+const fetchDataTemplate = async ({ yearMonth, type }: {
   yearMonth: YearMonth;
   type: TreasuryYieldType
-}) {
-return (await fetch(`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${yearMonth}?type=${type}&field_tdr_date_value_month=${yearMonth}&page&_format=csv`, { cache: 'no-store' })).text()
-}
+}) => (await fetch(`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${yearMonth}?type=${type}&field_tdr_date_value_month=${yearMonth}&page&_format=csv`, { cache: 'no-store' })).text()
 
 const yearMonthToday = () => yearMonth(today());
-}
 
 const yearMonthYesterday = () => yearMonth(yesterday());
-}
 
 const yesterday = () => new Date(Date.now() - 24 * 60 * 60 * 1000);
 
@@ -65,6 +53,4 @@ function yearMonth(date: Date): YearMonth {
     throw new Error(`Invalid yearMonth: ${yearMonthString} (original date: ${date.toISOString()})`);
 }
 
-function isValidYearMonth(yearMonth: string): yearMonth is YearMonth {
-  return /^\d{6}$/.test(yearMonth);
-}
+const isValidYearMonth = (yearMonth: string): yearMonth is YearMonth => /^\d{6}$/.test(yearMonth);
