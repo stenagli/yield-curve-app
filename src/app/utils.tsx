@@ -14,7 +14,7 @@ export async function fetchNominalData(): Promise<string> {
 async function fetchData(type: TreasuryYieldType): Promise<string> {
   let data = await fetchDataToday(type);
 
-  if (!data && day() === 1) {
+  if (!data && firstOfTheMonth()) {
     // This month's data has not been reported yet
     // so display the most recent data from last month
     data = await fetchDataYesterday(type);
@@ -26,6 +26,10 @@ async function fetchData(type: TreasuryYieldType): Promise<string> {
 
   return data;
 }
+
+const firstOfTheMonth = () => today().getDate() === 1;
+
+const today = () => new Date();
 
 function fetchDataToday(type: TreasuryYieldType) {
   return fetchDataTemplate({ yearMonth: yearMonthToday(), type });
@@ -42,18 +46,13 @@ async function fetchDataTemplate({ yearMonth, type }: {
 return (await fetch(`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${yearMonth}?type=${type}&field_tdr_date_value_month=${yearMonth}&page&_format=csv`, { cache: 'no-store' })).text()
 }
 
-const day = () => new Date().getDate();
-
-function yearMonthToday() {
-  const today = new Date();
-  return yearMonth(today)
+const yearMonthToday = () => yearMonth(today());
 }
 
-
-function yearMonthYesterday() {
-  const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
-  return yearMonth(yesterday);
+const yearMonthYesterday = () => yearMonth(yesterday());
 }
+
+const yesterday = () => new Date(Date.now() - 24 * 60 * 60 * 1000);
 
 function yearMonth(date: Date): YearMonth {
   const year = date.getFullYear();
