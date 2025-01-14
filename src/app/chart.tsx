@@ -13,6 +13,16 @@ import {
 
 import { Line } from 'react-chartjs-2';
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 class YieldData {
   private data: string;
 
@@ -55,16 +65,6 @@ class YieldData {
 }
 
 export default function YieldChart({ yield_csv, title, borderColor }: { yield_csv: string, title: string, borderColor: string }) {
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
-
   const yieldData = new YieldData(yield_csv);
 
   const data = {
