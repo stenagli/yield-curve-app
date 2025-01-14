@@ -10,8 +10,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
 import { Line } from 'react-chartjs-2';
+import { use } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -64,8 +64,8 @@ class YieldData {
   }
 }
 
-export default function YieldChart({ yield_csv, title, borderColor }: { yield_csv: string, title: string, borderColor: string }) {
-  const yieldData = new YieldData(yield_csv);
+export default function YieldChart({ yieldCsvPromise, title, borderColor }: { yieldCsvPromise: Promise<string>, title: string, borderColor: string }) {
+  const yieldData = new YieldData(use(yieldCsvPromise));
 
   const data = {
     datasets: [{
