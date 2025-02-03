@@ -10,10 +10,10 @@ export const fetchNominalData = () => fetchData('daily_treasury_yield_curve');
 async function fetchData(type: TreasuryYieldType): Promise<string> {
   let data = await fetchDataToday(type);
 
-  if (!data && firstOfTheMonth()) {
+  if (!data) {
     // This month's data has not been reported yet
-    // so display the most recent data from last month
-    data = await fetchDataYesterday(type);
+    // so display the most recent data from the previous month
+    data = await fetchDataPreviousMonth(type);
   }
 
   if (!data) {
@@ -29,7 +29,7 @@ const today = () => new Date();
 
 const fetchDataToday = (type: TreasuryYieldType) => fetchDataTemplate({ yearMonth: yearMonthToday(), type });
 
-const fetchDataYesterday = (type: TreasuryYieldType) => fetchDataTemplate({ yearMonth: yearMonthYesterday(), type });
+const fetchDataPreviousMonth = (type: TreasuryYieldType) => fetchDataTemplate({ yearMonth: yearMonthPreviousMonth(), type });
 
 const fetchDataTemplate = async ({ yearMonth, type }: {
   yearMonth: YearMonth;
@@ -38,9 +38,8 @@ const fetchDataTemplate = async ({ yearMonth, type }: {
 
 const yearMonthToday = () => yearMonth(today());
 
-const yearMonthYesterday = () => yearMonth(yesterday());
-
-const yesterday = () => new Date(Date.now() - 24 * 60 * 60 * 1000);
+const yearMonthPreviousMonth = () => yearMonth(previousMonth());
+const previousMonth = () => new Date(new Date().setMonth(today().getMonth() - 1));
 
 function yearMonth(date: Date): YearMonth {
   const year = date.getFullYear();
